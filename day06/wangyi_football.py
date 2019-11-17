@@ -26,8 +26,8 @@ def get_detailed_page_info(url):
     # 获取具体信息
     html_ele = etree.HTML(response.text)
     # / html / body / div[4] / div / div[2] / div[2] / a
-    event_name = html_ele.xpath('//div[@class="leftList2"]/div[@class="c2"]/a/text()')[0]
-    print(event_name)
+    # event_name = html_ele.xpath('//div[@class="leftList2"]/div[@class="c2"]/a/text()')[0]
+    # print(event_name)
 
     # 表格里面的xpath,获取所有的tr://div[@class="leftList4"]/table/tbody/tr
 
@@ -35,9 +35,17 @@ def get_detailed_page_info(url):
     # 所以爬之前先下载下来,再说
     # 审查元素和查看网页源代码是不一样的.
     tr_ele_list = html_ele.xpath('//div[@class="leftList4"]/table/tr')
-    print(tr_ele_list)
-
-
+    for i in range(1,len(tr_ele_list),3):
+        # print(tr_ele_list[i])
+        # 链式编程.
+        round = tr_ele_list[i].xpath('./td[1]/text()')[0].strip()
+        time = tr_ele_list[i].xpath('./td[2]/text()')[0].strip()
+        status = tr_ele_list[i].xpath('./td[3]/text()')[0].strip()
+        host_team = tr_ele_list[i].xpath('./td[4]//a/text()')[0].strip()
+        score = tr_ele_list[i].xpath('./td[5]//a/text()')[0].strip().replace(" ","").replace("\n","")
+        guest_team = tr_ele_list[i].xpath('./td[6]//a/text()')[0].strip()
+        print(round, time, status, host_team, score, guest_team)
+        print('-'*50)
 
 
 
