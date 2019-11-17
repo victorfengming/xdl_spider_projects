@@ -5,8 +5,8 @@
 # 本模块的功能:<用于练习xpath>
 
 from requests import get
-调用xpath的包
-
+# 调用xpath的包
+from lxml import etree
 url = "http://lol.178.com/"
 
 response = get(url)
@@ -16,7 +16,7 @@ response = get(url)
 
 # 需要找到的是,/html/head/title
 
-
+html_ele = etree.HTML(response.text)
 
 
 
